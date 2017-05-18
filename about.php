@@ -20,21 +20,17 @@
          
         </div>
       </header>
-      <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-        <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font"><a class="mdl-navigation__link" href="index.html">Home</a><a class="mdl-navigation__link" href="portfolio.html">Portfolio</a><a class="mdl-navigation__link" href="about.html">About</a><a class="mdl-navigation__link" href="contact.html">Contact</a>
-        </nav>
-      </div>
       <main class="mdl-layout__content">
         <div class="site-content">
           <div class="mdl-grid site-max-width">
             <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
               <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">About</h1>
+                <h1 class="mdl-card__title-text">Cloud Computing</h1>
               </div>
               <div class="mdl-card__media"><img class="article-image" src="img/about.jpg" border="0" alt="About">
               </div>
               <div class="mdl-grid site-copy">
-                <div class="mdl-cell mdl-cell--12-col"><h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Introduction</h3>
+                <div class="mdl-cell mdl-cell--12-col"><h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline" id="doc">Introduction</h3>
 <div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
     <p>Le projet consiste à simuler une api similaire à Amazon permettant de commander des livres à l'aide de différents services. herbergés par <b>Google App Engine</b> et <b>Heroku</b>
     </p>
@@ -42,16 +38,23 @@
     </p>
     <p>Le <b>StockService</b> permet de retourner le stock d'un livre grâce à <i>l'isbn</i> fourni par le <b>ShoppingService</b></p>
     <p>Le <b>WholeSealerService</b> va faire les calculs pour modifier le stock en base en fonction de la commande, il va recommander de nouveaux livre si le stock est insuffisant</p>
-    <a href="">Liens GitHub GAE</a>
-    <a href="https://github.com/nimartin/whole-saler-app">Liens GitHub Heroku</a>
+    <a href="https://github.com/nimartin/google-app-engine">Lien GitHub GAE</a><br>
+    <a href="https://github.com/nimartin/whole-saler-app">Lien GitHub Heroku</a>
+    <p>NB : ils sont aussi disponible en .rar dans le dossier téléchargé</p>
 </div>
 
 
-<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Google App Engine</h3>
+<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline" id="gae">Google App Engine</h3>
 <div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
     <p>
         GAE nous permet d'herbergés du code directement sur leurs serveurs. En plus de cela il nous fourni une base de données appelées datastore. Nos livres et  Clés de connexion seront donc stockés sur ce datastore.
     </p>
+    <h4>Datastore</h4>
+    <p>Le datastore est disponible sur ce lien : <a href="https://console.cloud.google.com/">https://console.cloud.google.com/</a>
+    <br> Login : iut.info63@gmail.com
+    <br> Mot de passe : info63000
+    <br> Application : infapp9
+   </p>
     <h4>Shopping Service</h4>
     <p>Le Shopping Service est celui qui gère les relations entre tous les services. Premièrement il vérifie en base si l'account existe, si c'est le cas il appelle <b>getStock()</b> du StockService. Ensuite, il appelle la méthode <b>addStock</b> du WholeSaler Service. Puis il retourne le résultat directement au client. Cependant, la gestion d'erreur est faite <b>404</b> (isbn invalide), <b>401</b> (L'utilisateur doit avoir un compte valide), <b>400</b> (mauvaises utilisation de requêtes) </p>
     <table class="mdl-data-table mdl-js-data-table">
@@ -95,7 +98,7 @@
   </table>
 </div>
 
-<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Heroku</h3>
+<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline" id="heroku">Heroku</h3>
 <div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
     <p>
         Heroky nous permet d'herbergés du code directement sur leurs serveurs. Nous aurions pu l'utiliser pour stocker nos données à l'aide de postgre mais nous avons préféré le datastore de GAE.
@@ -120,36 +123,19 @@
   </table>
 </div>
 
-<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Guzzle</h3>
+<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline" id="guzzle">Guzzle</h3>
 <div class="mdl-cell mdl-cell--12-col mdl-card__supporting-text no-padding ">
     <p>
         Pour exécuter le guzzle <a href="http://localhost:8000/client.php">http://localhost:8000/client.php</a><br>
         (Parfois il faut actualisé après l'avoir lancé sinon on a une exception : surement pour que les services GAE et Heroku se lancent)
+        Biensûr il est possible de le modifier pour pouvoir faire des tests.
     </p>
-    <h4>WholeSaler Service</h4>
-    <p>Le WholeSaler Service va faire les différents calcul pour savoir s'il doit juste diminuer le stock, ou recommander d'autres livres pour pouvoir satistaire la commande du client. Il rajoute toujours 5 livres supplémentaires en plus des livres commandés par le client pour avoir un stock dans la base. Une fois le calcul fait il appelle la methode <b>updateStock</b> de ShoppingService</p>
-    <table class="mdl-data-table mdl-js-data-table">
-    <thead>
-      <tr>
-        <th class="mdl-data-table__cell--non-numeric">Nom de méthode</th>
-        <th class="mdl-data-table__cell--non-numeric">Type de requête</th>
-        <th class="mdl-data-table__cell--non-numeric">Paramètres</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="mdl-data-table__cell--non-numeric">addStock</td>
-        <td class="mdl-data-table__cell--non-numeric">GET</td>
-        <td class="mdl-data-table__cell--non-numeric">ISBN, CORR, QUANTITE, STOCK</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 
 
 
-<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Team</h3>
+<h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Repartition du travail</h3>
 
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col">
@@ -159,6 +145,10 @@
         <span class="demo-card-image__filename">Yvan Betremieux</span>
       </div>
     </div>
+      <ul>
+        <li><a href="#heroku">Application heroku</a></li>
+        <li><a href="#guzzle">Guzzle</a></li>
+      </ul>
   </div>
 
   <div class="mdl-cell mdl-cell--4-col">
@@ -168,8 +158,14 @@
         <span class="demo-card-image__filename">Nicolas Martin</span>
       </div>
     </div>
+      <ul>
+          <li><a href="#gae">Applications GAE</a></li>
+          <li><a href="#doc">Doc</a></li>
+        </ul>
   </div>
 </div>
+
+
 
 </div>
               </div>
